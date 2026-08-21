@@ -1,0 +1,18 @@
+[
+  {
+    "run_id": "run_20260821_204510_6f409d",
+    "step": "login",
+    "timestamp": "2026-08-21T20:45:13.565372",
+    "status": "success",
+    "detection_reason": null,
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": {
+      "username": "demo",
+      "url": "http://localhost:5000/search"
+    },
+    "error": null
+  }
+]

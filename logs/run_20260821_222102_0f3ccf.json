@@ -1,0 +1,15 @@
+[
+  {
+    "run_id": "run_20260821_222102_0f3ccf",
+    "step": "login",
+    "timestamp": "2026-08-21T22:22:34.036428",
+    "status": "fail",
+    "detection_reason": "selector missing: Page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"username\\\"]\")\n",
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": null,
+    "error": "Page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name=\\\"username\\\"]\")\n"
+  }
+]

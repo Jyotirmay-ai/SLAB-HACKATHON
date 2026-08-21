@@ -1,6 +1,5 @@
 webcmd/
 env
 .venv/
-logs/
 docs/
 test files/
