@@ -22,7 +22,7 @@ processes = []
 
 def start_flask():
     """Start the Flask demo site"""
-    print("🟢 Starting Flask demo site...")
+    print("[INFO] Starting Flask demo site...")
     cmd = [
         os.path.join(".venv", "Scripts", "python.exe"),
         os.path.join(DEMO_SITE_DIR, "app.py")
@@ -34,12 +34,12 @@ def start_flask():
         stderr=subprocess.PIPE
     )
     processes.append(("Flask", proc))
-    print(f"   ✅ Flask started on http://127.0.0.1:5000 (PID: {proc.pid})")
+    print(f"   [OK] Flask started on http://127.0.0.1:5000 (PID: {proc.pid})")
     time.sleep(3)
 
 def start_agent():
     """Start the QA Agent"""
-    print("🤖 Starting QA Agent...")
+    print("[AGENT] Starting QA Agent...")
     cmd = [
         os.path.join(".venv", "Scripts", "python.exe"),
         "run_agent.py"
@@ -51,17 +51,17 @@ def start_agent():
         stderr=subprocess.PIPE
     )
     processes.append(("QA Agent", proc))
-    print(f"   🟡 QA Agent running (PID: {proc.pid})")
-    print("   💡 The agent will:")
-    print("      • Log in to the demo site")
-    print("      • Run the flow: login → search → cart → checkout")
-    print("      • 🟸 Pause at approval gate (waiting for 'y' input)")
-    print("      • 🔄 Auto-recover from selector changes if site is broken")
+    print(f"   [RUNNING] QA Agent running (PID: {proc.pid})")
+    print("   [INFO] The agent will:")
+    print("      - Log in to the demo site")
+    print("      - Run the flow: login -> search -> cart -> checkout")
+    print("      - [PAUSE] Pause at approval gate (waiting for 'y' input)")
+    print("      - [RECOVER] Auto-recover from selector changes if site is broken")
     print()
 
 def signal_handler(sig, frame):
     """Handle Ctrl+C"""
-    print("\n🛑 Stopping QA Agent...")
+    print("\n[STOP] Stopping QA Agent...")
     for name, proc in processes:
         if name == "QA Agent":
             proc.terminate()
@@ -69,9 +69,9 @@ def signal_handler(sig, frame):
                 proc.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 proc.kill()
-    print("   ✅ QA Agent stopped")
-    print("   🟢 Flask demo site still running...")
-    print("   📊 Start dashboard separately: streamlit run qa_agent/dashboard/app.py")
+    print("   [OK] QA Agent stopped")
+    print("   [INFO] Flask demo site still running...")
+    print("   [DASHBOARD] Start dashboard separately: streamlit run qa_agent/dashboard/app.py")
     sys.exit(0)
 
 def main():

@@ -153,7 +153,7 @@ button.confirm:hover { background: #c82333; }
 </div>
 <h2>Checkout Review</h2>
 <div class="warning">
-<strong>⚠ Human Approval Required:</strong> This is the final step before payment. The agent will pause here and wait for human approval before proceeding.
+<strong>Human Approval Required:</strong> This is the final step before payment. The agent will pause here and wait for human approval before proceeding.
 </div>
 <div class="order-summary">
 <h3>Order Summary</h3>
@@ -186,7 +186,7 @@ body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padd
 </style>
 </head>
 <body>
-<h1 class="success">✓ Order Confirmed!</h1>
+<h1 class="success">Order Confirmed!</h1>
 <div class="order-id">
 Order ID: {{ order_id }}<br>
 Total: ${{ total }}

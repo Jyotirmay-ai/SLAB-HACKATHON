@@ -22,7 +22,7 @@ processes = []
 
 def start_flask():
     """Start the Flask demo site"""
-    print("🟢 Starting Flask demo site...")
+    print("[INFO] Starting Flask demo site...")
     cmd = [
         os.path.join(".venv", "Scripts", "python.exe"),
         os.path.join(DEMO_SITE_DIR, "app.py")
@@ -36,11 +36,11 @@ def start_flask():
     processes.append(("Flask", proc))
     print(f"   PID: {proc.pid}")
     time.sleep(3)  # Wait for Flask to start
-    print("   ✅ Flask is running on http://127.0.0.1:5000\n")
+    print("   [OK] Flask is running on http://127.0.0.1:5000\n")
 
 def start_agent():
     """Start the QA agent"""
-    print("🤖 Starting QA Agent...")
+    print("[AGENT] Starting QA Agent...")
     cmd = [
         os.path.join(".venv", "Scripts", "python.exe"),
         "run_agent.py"
@@ -54,11 +54,11 @@ def start_agent():
     processes.append(("QA Agent", proc))
     print(f"   PID: {proc.pid}")
     print("   The agent will run and pause at the approval gate")
-    print("   💡 Tip: Type 'y' at the approval prompt to continue\n")
+    print("   [TIP] Tip: Type 'y' at the approval prompt to continue\n")
 
 def start_dashboard():
     """Start the Streamlit dashboard"""
-    print("📊 Starting Dashboard...")
+    print("[DASHBOARD] Starting Dashboard...")
     cmd = [
         os.path.join(".venv", "Scripts", "python.exe"),
         "-m", "streamlit", "run", "dashboard/app.py",
@@ -73,11 +73,11 @@ def start_dashboard():
     )
     processes.append(("Dashboard", proc))
     print(f"   PID: {proc.pid}")
-    print("   📈 Dashboard will open at http://localhost:8501\n")
+    print("   [INFO] Dashboard will open at http://localhost:8501\n")
 
 def signal_handler(sig, frame):
     """Handle Ctrl+C to gracefully stop all processes"""
-    print("\n🛑 Stopping all components...")
+    print("\n[STOP] Stopping all components...")
     for name, proc in processes:
         print(f"   Stopping {name} (PID: {proc.pid})...")
         proc.terminate()
@@ -85,7 +85,7 @@ def signal_handler(sig, frame):
             proc.wait(timeout=5)
         except subprocess.TimeoutExpired:
             proc.kill()
-    print("   ✅ All components stopped")
+    print("   [OK] All components stopped")
     sys.exit(0)
 
 def main():
@@ -123,7 +123,7 @@ def main():
             all_running = True
             for name, proc in processes:
                 if proc.poll() is not None:
-                    print(f"   ⚠️ {name} has exited (code: {proc.returncode})")
+                    print(f"   [WARN] {name} has exited (code: {proc.returncode})")
                     all_running = False
             
             if not all_running:

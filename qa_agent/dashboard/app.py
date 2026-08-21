@@ -7,7 +7,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Self-Healing QA Agent Dashboard", layout="wide")
 
-st.title("🤖 Self-Healing QA Agent Dashboard")
+st.title("Self-Healing QA Agent Dashboard")
 st.markdown("Real-time timeline of QA agent runs, failures, and recoveries")
 
 dashboard_dir = os.path.dirname(os.path.abspath(__file__))
@@ -26,11 +26,11 @@ run_id = logs[0]['run_id'] if logs else "Unknown"
 st.sidebar.markdown(f"**Run ID:** `{run_id}`")
 
 status_colors = {
-    "success": "🟢",
-    "fail": "🔴",
-    "recovered": "🟡",
-    "approval_pending": "🟠",
-    "approved": "🔵"
+    "success": "SUCCESS",
+    "fail": "FAIL",
+    "recovered": "RECOVERED",
+    "approval_pending": "PENDING",
+    "approved": "APPROVED"
 }
 
 status_labels = {
@@ -56,11 +56,11 @@ with col4:
 
 st.markdown("---")
 
-st.subheader("📋 Execution Timeline")
+st.subheader("Execution Timeline")
 
 for i, log in enumerate(logs):
     status = log['status']
-    icon = status_colors.get(status, "⚪")
+    icon = status_colors.get(status, "UNKNOWN")
     label = status_labels.get(status, status)
     
     with st.container():
@@ -77,18 +77,18 @@ for i, log in enumerate(logs):
             ts = log['timestamp']
             try:
                 dt = datetime.fromisoformat(ts.replace('Z', '+00:00'))
-                st.caption(f"⏱ {dt.strftime('%H:%M:%S')}")
+                st.caption(f"Time: {dt.strftime('%H:%M:%S')}")
             except:
-                st.caption(f"⏱ {ts}")
+                st.caption(f"Time: {ts}")
             
             if log.get('recovery_duration_ms'):
-                st.caption(f"⚡ Recovery: {log['recovery_duration_ms']}ms")
+                st.caption(f"Recovery: {log['recovery_duration_ms']}ms")
         
         with cols[3]:
             if log.get('detection_reason'):
-                st.error(f"🔍 {log['detection_reason']}")
+                st.error(f"Reason: {log['detection_reason']}")
             if log.get('recovery_action'):
-                st.success(f"🔧 {log['recovery_action']}")
+                st.success(f"Action: {log['recovery_action']}")
         
         with st.expander("Details"):
             if log.get('data'):
@@ -107,10 +107,10 @@ for i, log in enumerate(logs):
         st.markdown("---")
 
 st.markdown("---")
-st.subheader("📊 Raw Log Data")
+st.subheader("Raw Log Data")
 st.json(logs)
 
-if st.button("🔄 Refresh"):
+if st.button("Refresh"):
     st.rerun()
 
 st.sidebar.markdown("---")

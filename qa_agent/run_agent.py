@@ -18,7 +18,7 @@ from orchestrator.orchestrator import Orchestrator
 
 
 async def main():
-    orchestrator = Orchestrator(headless=False, approval_mode="cli")
+    orchestrator = Orchestrator(headless=False, slow_mo=2000, approval_mode="cli")
     await orchestrator.run_flow()
 
 

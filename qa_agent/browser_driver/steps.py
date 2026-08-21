@@ -13,15 +13,16 @@ class StepResult:
 
 
 class BrowserDriver:
-    def __init__(self, headless: bool = False):
+    def __init__(self, headless: bool = False, slow_mo: int = 0):
         self.headless = headless
+        self.slow_mo = slow_mo
         self.browser = None
         self.page = None
         self.playwright = None
     
     async def start(self):
         self.playwright = await async_playwright().start()
-        self.browser = await self.playwright.chromium.launch(headless=self.headless)
+        self.browser = await self.playwright.chromium.launch(headless=self.headless, slow_mo=self.slow_mo)
         self.page = await self.browser.new_page()
     
     async def close(self):

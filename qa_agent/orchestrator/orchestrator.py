@@ -270,8 +270,8 @@ class ApprovalGate:
 
 
 class Orchestrator:
-    def __init__(self, headless: bool = False, approval_mode: str = "cli"):
-        self.driver = BrowserDriver(headless=headless)
+    def __init__(self, headless: bool = False, slow_mo: int = 2000, approval_mode: str = "cli"):
+        self.driver = BrowserDriver(headless=headless, slow_mo=slow_mo)
         self.recipe_cache = RecipeCache()
         self.failure_detector = FailureDetector()
         self.recovery_engine = RecoveryEngine(self.driver, self.recipe_cache)
