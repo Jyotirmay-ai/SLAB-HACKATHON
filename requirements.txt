@@ -1,0 +1,17 @@
+# Browser automation
+browser-use
+playwright
+
+# Web framework for demo site
+flask
+
+# Dashboard
+streamlit
+
+# Utilities
+python-dotenv
+requests
+
+
+
+
