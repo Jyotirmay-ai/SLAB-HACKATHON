@@ -1,0 +1,112 @@
+[
+  {
+    "run_id": "run_20260822_003902_895557",
+    "step": "login",
+    "timestamp": "2026-08-22T00:39:08.367299",
+    "status": "success",
+    "detection_reason": null,
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": {
+      "username": "demo",
+      "url": "http://127.0.0.1:5000/search"
+    },
+    "error": null
+  },
+  {
+    "run_id": "run_20260822_003902_895557",
+    "step": "search",
+    "timestamp": "2026-08-22T00:39:10.499517",
+    "status": "success",
+    "detection_reason": null,
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": {
+      "query": "widget",
+      "products_found": 3,
+      "products": [
+        {
+          "name": "Blue Widget",
+          "price": "$499"
+        },
+        {
+          "name": "Red Gadget",
+          "price": "$799"
+        },
+        {
+          "name": "Green Gizmo",
+          "price": "$299"
+        }
+      ]
+    },
+    "error": null
+  },
+  {
+    "run_id": "run_20260822_003902_895557",
+    "step": "add_to_cart",
+    "timestamp": "2026-08-22T00:39:10.607986",
+    "status": "success",
+    "detection_reason": null,
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": {
+      "product": "Blue Widget",
+      "cart_count": 0
+    },
+    "error": null
+  },
+  {
+    "run_id": "run_20260822_003902_895557",
+    "step": "go_to_cart",
+    "timestamp": "2026-08-22T00:39:10.646799",
+    "status": "success",
+    "detection_reason": null,
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": {
+      "items": [],
+      "total": "0"
+    },
+    "error": null
+  },
+  {
+    "run_id": "run_20260822_003902_895557",
+    "step": "go_to_checkout",
+    "timestamp": "2026-08-22T00:39:10.689335",
+    "status": "approval_pending",
+    "detection_reason": null,
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": {
+      "url": "http://127.0.0.1:5000/checkout",
+      "page_title": "Checkout - Demo Shop"
+    },
+    "error": null
+  },
+  {
+    "run_id": "run_20260822_003902_895557",
+    "step": "go_to_checkout",
+    "timestamp": "2026-08-22T00:39:20.176930",
+    "status": "approved",
+    "detection_reason": null,
+    "recovery_action": null,
+    "recovery_duration_ms": null,
+    "old_selector": null,
+    "new_selector": null,
+    "data": {
+      "url": "http://127.0.0.1:5000/checkout",
+      "page_title": "Checkout - Demo Shop"
+    },
+    "error": null
+  }
+]

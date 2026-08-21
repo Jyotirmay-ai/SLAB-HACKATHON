@@ -39,21 +39,21 @@ class BrowserDriver:
             p_sel = password_selector or 'input[name="password"]'
             
             try:
-                await self.page.fill(u_sel, username)
+                await self.page.fill(u_sel, username, timeout=2000)
             except Exception:
                 for alt in ['input[name="login_"]', 'input[type="text"]', '[placeholder*="User" i]']:
                     try:
-                        await self.page.fill(alt, username)
+                        await self.page.fill(alt, username, timeout=2000)
                         break
                     except Exception:
                         pass
             
             try:
-                await self.page.fill(p_sel, password)
+                await self.page.fill(p_sel, password, timeout=2000)
             except Exception:
                 for alt in ['input[name="pass_"]', 'input[type="password"]', '[placeholder*="Pass" i]']:
                     try:
-                        await self.page.fill(alt, password)
+                        await self.page.fill(alt, password, timeout=2000)
                         break
                     except Exception:
                         pass
@@ -82,9 +82,9 @@ class BrowserDriver:
             if query:
                 s_sel = search_selector or 'input[name="q"]'
                 try:
-                    await self.page.fill(s_sel, query)
+                    await self.page.fill(s_sel, query, timeout=2000)
                 except Exception:
-                    await self.page.fill('input[type="text"]', query)
+                    await self.page.fill('input[type="text"]', query, timeout=2000)
                 await self.page.click('button[type="submit"]')
                 await self.page.wait_for_load_state("domcontentloaded")
             
@@ -113,25 +113,12 @@ class BrowserDriver:
         try:
             await self.page.wait_for_selector('.product', timeout=5000)
             
-            product_added = await self.page.evaluate(f"""() => {{
-                const items = document.querySelectorAll('.product');
-                for (const item of items) {{
-                    const name = item.querySelector('h3')?.textContent?.trim();
-                    if (name && name.includes('{product_name}')) {{
-                        const btn = item.querySelector('button.add-cart, button[type="submit"]');
-                        if (btn) {{
-                            btn.click();
-                            return true;
-                        }}
-                    }}
-                }}
-                return false;
-            }}""")
+            try:
+                await self.page.click(f'.product:has-text("{product_name}") button', timeout=3000)
+            except Exception:
+                await self.page.click('button.add-cart, button[type="submit"]', timeout=3000)
             
-            if not product_added:
-                await self.page.click('button.add-cart, button[type="submit"]')
-            
-            await self.page.wait_for_timeout(1000)
+            await self.page.wait_for_load_state("domcontentloaded")
             
             cart_count = await self.page.evaluate("""() => {
                 const link = document.querySelector('a[href*="cart"]');
@@ -208,7 +195,7 @@ class BrowserDriver:
     async def confirm_order(self) -> StepResult:
         try:
             await self.page.click('button.confirm, button[type="submit"]')
-            await self.page.wait_for_url("**/confirm", timeout=10000)
+            await self.page.wait_for_selector('.order-id', timeout=10000)
             
             order_id = await self.page.evaluate("""() => {
                 const el = document.querySelector('.order-id');
